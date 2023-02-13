@@ -1,0 +1,10 @@
+<div>
+  <ng-content></ng-content>
+  <ng-container *ngFor="let item of items; let index = index">
+    <span class="ml-1 text-gray italic">{{ item }}</span>
+    <span
+      *ngIf="items && items.length > 1 && index < items.length - 1"
+      >,</span
+    >
+  </ng-container>
+</div>

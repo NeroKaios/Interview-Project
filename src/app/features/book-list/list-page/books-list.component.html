@@ -1,0 +1,42 @@
+<ng-container class="relative">
+  <app-books-search
+    (search)="getSearchParams($event)"
+    (onSearchNumberChange)="changeNumberOfBooks($event)"
+  ></app-books-search>
+  <div class="container mx-auto sm:px-4" *ngIf="booksCollection">
+    <div *ngIf="!booksCollection.items; else collectionNotEmpty">
+      Your search did not return any results
+    </div>
+    <ng-template #collectionNotEmpty>
+      <h4>Search results for "{{ searchParams.searchTerm }}"</h4>
+
+      <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-3">
+        <app-book-card
+          *ngFor="let item of booksCollection.items | slice:0:displayedNumberOfBooks"
+          [volume]="item"
+        ></app-book-card>
+      </div>
+
+      <div class="flex items-center justify-center flex-wrap my-3" *ngIf="booksCollection.totalItems > paginationStep!">
+        <app-pagination-button
+          [isDisabled]="searchParams.startIndex <= 0"
+          (buttonClick)="onPreviousPageClick()"
+        >
+           <- Previous page
+        </app-pagination-button>
+
+        <app-pagination-button
+          class="ml-1"
+          [isDisabled]="
+            searchParams.startIndex >
+            booksCollection.totalItems - paginationStep!
+          "
+          (buttonClick)="onNextPageClick()"
+        >
+          Next page ->
+        </app-pagination-button>
+      </div>
+    </ng-template>
+  </div>
+</ng-container>
+

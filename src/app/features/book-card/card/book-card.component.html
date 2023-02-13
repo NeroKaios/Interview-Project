@@ -1,0 +1,13 @@
+<div class="min-h-[25rem] p-1 bg-dark_green text-white" *ngIf="volume">
+  <div class="w-full h-[15rem] relative cursor-pointer" (click)="openBookDetailPage()">
+    <app-book-cover
+      [imageLinks]="volume.volumeInfo.imageLinks"
+    ></app-book-cover>
+    <div class="absolute top-0 left-0 h-full bg-mint w-full opacity-0 transition ease-out duration-200 hover:opacity-30"></div>
+  </div>
+
+  <app-book-card-content
+    [volumeInfo]="volume?.volumeInfo"
+    (detailButtonClick)="openBookDetailPage()"
+  ></app-book-card-content>
+</div>

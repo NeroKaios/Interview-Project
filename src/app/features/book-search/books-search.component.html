@@ -1,0 +1,32 @@
+<div class="bg-dark_green mb-4">
+  <div class="container mx-auto sm:px-4 py-3 min-sm:w-[540px]">
+    <form [formGroup]="formGroup" class="text-white">
+      <div>
+        <label class="text-lg">Search <span class="text-red">*</span></label>
+      </div>
+      <div class="w-full">
+        <input formControlName="searchTerm" type="text" (input)="onSearch()"
+               [ngClass]="{'is-invalid':searchTerm.invalid && (searchTerm.dirty || searchTerm.touched)}"
+               class="text-black block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded focus:text-black"
+               placeholder="Search for books by name / author / keyword..."/>
+        </div>
+        <div class="text-red" *ngIf="!searchTerm.value && (searchTerm.status.toString().localeCompare('INVALID') || searchTerm.dirty)">
+          Please fill this section
+        </div>
+      <div>
+        <label class="text-lg">Number Of Books <span class="text-red">*</span></label>
+      </div>
+      <div>
+      <select formControlName="selectNumber"
+              id="select" [(ngModel)]="searchedNumberOfBooks" (change)="changeNumberOfBooks()"
+      class="text-black">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
+      </div>
+      <div class="text-red" *ngIf="selectNumber.invalid && (selectNumber.dirty || selectNumber.touched)">Please select a number</div>
+    </form>
+  </div>
+</div>

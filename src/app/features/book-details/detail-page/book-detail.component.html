@@ -1,0 +1,9 @@
+<ng-container class="relative" *ngIf="volume">
+  <app-book-detail-content [volume] = "volume"></app-book-detail-content>
+  <div class="container mx-auto sm:px-4 mt-3 pl-[80px] xl:w-fit" *ngIf="volume?.volumeInfo?.description">
+    <h5>Description:</h5>
+    <p class="text-black">{{ volume?.volumeInfo?.description }}</p>
+  </div>
+  <div class="h-[100px]"></div>
+</ng-container>
+
